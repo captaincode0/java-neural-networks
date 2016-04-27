@@ -19,10 +19,33 @@ public class NeuralNet {
      */
 
     public void initNeuronalNetwork(){
+        inputLayer = new InputLayer();
+        inputLayer.setNumberOfNeuronsInLayer(2);
+        inputLayer = inputLayer.initLayer(inputLayer);
 
+        numberOfHiddenLayers = 2;
+        listOfHiddenLayer = new ArrayList<>(numberOfHiddenLayers);
+        for(int i=0; i<numberOfHiddenLayers; i++){
+            hiddenLayer = new HiddenLayer();
+            hiddenLayer.setNumberOfNeuronsInLayer(3);
+            listOfHiddenLayer.add(hiddenLayer);
+        }
+
+        outputLayer = new OutputLayer();
+        outputLayer.setNumberOfNeuronsInLayer(1);
+        outputLayer = outputLayer.initLayer(outputLayer);
+
+        listOfHiddenLayer = hiddenLayer.initLayer(
+                hiddenLayer,
+                listOfHiddenLayer,
+                inputLayer,
+                outputLayer
+        );
     }
 
     public void watchNeuralNetwork(){
-
+        inputLayer.printLayer(inputLayer);
+        hiddenLayer.printLayer(listOfHiddenLayer);
+        outputLayer.printLayer(outputLayer);
     }
 }

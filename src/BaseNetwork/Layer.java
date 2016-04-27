@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by captaincode on 21/02/16.
-    @{abstract}
-    Implemented in InputLayer, OutputLayer, HiddenLayer.
+ * Implemented in InputLayer, OutputLayer, HiddenLayer.
  */
 public class Layer {
     private ArrayList<Neuron> listOfNeurons;

@@ -7,7 +7,48 @@ import java.util.ArrayList;
  */
 public class HiddenLayer extends Layer{
     public ArrayList<HiddenLayer> initLayer(HiddenLayer hiddenLayer, ArrayList<HiddenLayer> listOfHiddenLayer, InputLayer inputLayer, OutputLayer outputLayer){
+        ArrayList<Double> listOfWeightIn = new ArrayList<>(),
+            listOfWeightOut = new ArrayList<>();
+        ArrayList<Neuron> hiddenLayerNeurons = new ArrayList<>();
+        int numberOfHiddenLayers = listOfHiddenLayer.size();
 
+        for(int i=0; i<numberOfHiddenLayers; i++){
+            for(int j=0; j<hiddenLayer.getNumberOfNeuronsInLayer(); j++){
+                Neuron neuron = new Neuron();
+                int limitin, limitout;
+
+                if(i==0){
+                    limitin = inputLayer.getNumberOfNeuronsInLayer();
+                    if(numberOfHiddenLayers > 1)
+                        limitout = listOfHiddenLayer.get(i+1).getNumberOfNeuronsInLayer();
+                    else
+                        limitout = listOfHiddenLayer.get(i).getNumberOfNeuronsInLayer();
+                 }
+                else if(i == numberOfHiddenLayers -1){
+                    limitin = listOfHiddenLayer.get(i-1).getNumberOfNeuronsInLayer();
+                    limitout = outputLayer.getNumberOfNeuronsInLayer();
+                }
+                else{
+                    limitin = listOfHiddenLayer.get(i-1).getNumberOfNeuronsInLayer();
+                    limitout = listOfHiddenLayer.get(i+1).getNumberOfNeuronsInLayer();
+                }
+
+                for(int x=0; x<limitin; x++)
+                    listOfWeightIn.add(neuron.initNeuron());
+
+                for(int z=0; z<limitout; z++)
+                    listOfWeightOut.add(neuron.initNeuron());
+
+                neuron.setListOfWeightIn(listOfWeightIn);
+                neuron.setListOfWeightOut(listOfWeightOut);
+                hiddenLayerNeurons.add(neuron);
+
+                listOfWeightIn = new ArrayList<>();
+                listOfWeightOut = new ArrayList<>();
+            }
+            listOfHiddenLayer.get(i).setListOfNeurons(hiddenLayerNeurons);
+            hiddenLayerNeurons = new ArrayList<>();
+        }
 
         return listOfHiddenLayer;
     }

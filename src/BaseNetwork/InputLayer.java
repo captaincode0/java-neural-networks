@@ -8,11 +8,11 @@ import java.util.ArrayList;
 public class InputLayer extends Layer{
     public InputLayer initLayer(InputLayer inputLayer) {
         int numberOfNeuronsInLayer = inputLayer.getNumberOfNeuronsInLayer();
-        ArrayList<Neuron> neurons = new ArrayList<Neuron>(numberOfNeuronsInLayer);
+        ArrayList<Neuron> neurons = new ArrayList<>(numberOfNeuronsInLayer);
         ArrayList<Double> listofweightin;
 
         for(int j=0; j<numberOfNeuronsInLayer; j++){
-            listofweightin = new ArrayList<Double>(1);
+            listofweightin = new ArrayList<>();
             Neuron cneuron = new Neuron();
             listofweightin.add(cneuron.initNeuron());
             cneuron.setListOfWeightIn(listofweightin);
