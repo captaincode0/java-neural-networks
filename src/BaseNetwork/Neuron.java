@@ -28,6 +28,6 @@ public class Neuron {
     }
 
     public ArrayList<Double> getListOfWeightOut(){
-        return this.getListOfWeightOut();
+        return this.listOfWeightOut;
     }
 }
